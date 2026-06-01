@@ -63,7 +63,9 @@ fun T0H1ScannerApp(viewModel: ScanViewModel) {
             } else {
                 SettingsScreen(
                     settings = state.settings,
-                    onSettingsChanged = viewModel::updateSettings,
+                    onSettingsChanged = { newSettings ->
+    viewModel.updateSettings { newSettings }
+},
                     onReset = viewModel::resetSettings,
                     onBack = { viewModel.setScreen(AppScreen.Home) },
                 )
