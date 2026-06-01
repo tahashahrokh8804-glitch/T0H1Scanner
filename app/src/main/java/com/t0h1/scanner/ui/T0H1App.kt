@@ -27,6 +27,7 @@ import com.t0h1.scanner.model.AppScreen
 import com.t0h1.scanner.ui.screens.HomeScreen
 import com.t0h1.scanner.ui.screens.SettingsScreen
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun T0H1ScannerApp(viewModel: ScanViewModel) {
     val state by viewModel.uiState.collectAsState()
