@@ -1,9 +1,13 @@
 package com.t0h1.scanner.ui.theme
 
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Shapes
 import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.unit.dp
 
 private val T0H1DarkColorScheme = darkColorScheme(
     primary = Color(0xFF60A5FA),
@@ -21,11 +25,20 @@ private val T0H1DarkColorScheme = darkColorScheme(
     outline = Color(0xFF334155),
 )
 
+private val T0H1Shapes = Shapes(
+    extraSmall = RoundedCornerShape(10.dp),
+    small = RoundedCornerShape(14.dp),
+    medium = RoundedCornerShape(18.dp),
+    large = RoundedCornerShape(24.dp),
+    extraLarge = RoundedCornerShape(28.dp),
+)
+
 @Composable
 fun T0H1ScannerTheme(content: @Composable () -> Unit) {
     MaterialTheme(
         colorScheme = T0H1DarkColorScheme,
-        typography = androidx.compose.material3.Typography(),
+        typography = Typography(),
+        shapes = T0H1Shapes,
         content = content,
     )
 }

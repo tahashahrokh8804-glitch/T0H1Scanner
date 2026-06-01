@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">T0H1 Scanner</string>
+    <string name="home_title">خانه</string>
+    <string name="settings_title">تنظیمات</string>
+
+    <string name="hero_title">داشبورد حرفه‌ای اسکن</string>
+    <string name="hero_subtitle">هدف‌ها را تمیز بررسی کنید، نتایج را مرتب کنید و سریع خروجی بگیرید.</string>
+    <string name="hero_hint">رابط بومی • پشت‌صحنه Chaquopy • مناسب کار آفلاین</string>
+
+    <string name="targets_title">هدف‌ها</string>
+    <string name="targets_label">فهرست هدف‌ها</string>
+    <string name="targets_placeholder">1.1.1.1
+example.com
+example.com:443 | US | primary</string>
+    <string name="targets_help">می‌توانید هاست، IP یا host:port وارد کنید. بعد از علامت | هم برچسب منطقه و توضیح پشتیبانی می‌شود.</string>
+
+    <string name="region_filter_label">فیلتر کشور / منطقه</string>
+    <string name="region_filter_placeholder">US، EU، Asia، primary</string>
+
+    <string name="ports_label">فهرست پورت‌ها</string>
+    <string name="ports_placeholder">80, 443, 8080</string>
+
+    <string name="search_label">جست‌وجو در نتایج</string>
+    <string name="search_placeholder">جست‌وجو بر اساس IP، پورت، منطقه، توضیح یا وضعیت</string>
+
+    <string name="start_scan">شروع اسکن</string>
+    <string name="stop_scan">توقف</string>
+    <string name="clear_results">پاک‌کردن نتایج</string>
+    <string name="export_csv">خروجی CSV</string>
+    <string name="export_txt">خروجی TXT</string>
+    <string name="export_json">خروجی JSON</string>
+
+    <string name="scanning">در حال اسکن</string>
+    <string name="idle">آماده</string>
+    <string name="progress">پیشرفت</string>
+    <string name="completed">انجام‌شده</string>
+    <string name="total">کل</string>
+    <string name="responsive">پاسخ‌گو</string>
+    <string name="average_latency">میانگین تأخیر</string>
+    <string name="best_latency">بهترین تأخیر</string>
+    <string name="results_displayed">نمایش داده‌شده</string>
+    <string name="ms_short">ms</string>
+
+    <string name="results_title">نتایج</string>
+    <string name="results_empty">هنوز نتیجه‌ای وجود ندارد. یک اسکن اجرا کنید تا اینجا نمایش داده شود.</string>
+    <string name="results_empty_hint">چند هدف را امتحان کنید و بهترین‌ها را برای بعد نگه دارید.</string>
+
+    <string name="status_ready">آماده</string>
+    <string name="status_scanning">در حال اسکن...</string>
+    <string name="status_stopping">در حال توقف...</string>
+    <string name="status_completed">تکمیل شد</string>
+    <string name="status_no_targets">حداقل یک هدف وارد کنید.</string>
+    <string name="status_no_responsive">هیچ هدف پاسخ‌گویی پیدا نشد.</string>
+    <string name="status_nothing_export">فعلاً چیزی برای خروجی گرفتن نیست.</string>
+    <string name="status_exported">خروجی %1$s ذخیره شد</string>
+
+    <string name="settings_connection_title">تنظیمات پیش‌فرض اسکن</string>
+    <string name="settings_info_title">اطلاعات برنامه</string>
+    <string name="timeout_seconds_label">مهلت (ثانیه)</string>
+    <string name="concurrency_label">هم‌زمانی</string>
+    <string name="max_display_label">حداکثر نتایج نمایشی</string>
+    <string name="default_ports_label">پورت‌های پیش‌فرض</string>
+    <string name="settings_note">زبان فارسی و انگلیسی پشتیبانی می‌شود. برنامه با زبان دستگاه هماهنگ می‌شود و از راست‌به‌چپ هم پشتیبانی دارد.</string>
+    <string name="settings_hint">رابط برنامه بومی است و موتور پایتون فقط وقتی اسکن را شروع کنید از طریق Chaquopy اجرا می‌شود.</string>
+    <string name="reset_defaults">بازنشانی پیش‌فرض‌ها</string>
+    <string name="version_label">نسخه 0.2</string>
+
+    <string name="target_label">هدف</string>
+    <string name="region_label">منطقه</string>
+    <string name="notes_label">یادداشت</string>
+    <string name="status_label">وضعیت</string>
+    <string name="latency_label">تأخیر</string>
+    <string name="ip_port_label">IP و پورت</string>
+    <string name="last_export">آخرین خروجی</string>
+    <string name="status_open">باز</string>
+    <string name="status_success">موفق</string>
+    <string name="status_timeout">اتمام زمان</string>
+    <string name="status_closed">بسته</string>
+    <string name="status_error">خطا</string>
+
+    <string name="settings_accessibility">تنظیمات</string>
+    <string name="back">بازگشت</string>
+    <string name="open_results_hint">فقط هدف‌هایی را که خودتان وارد کرده‌اید جست‌وجو و بررسی کنید.</string>
+</resources>
