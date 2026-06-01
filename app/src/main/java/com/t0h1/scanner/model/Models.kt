@@ -33,6 +33,7 @@ data class AppDraft(
     val targetInput: String = "",
     val regionFilter: String = "",
     val portInput: String = "",
+    val searchQuery: String = "",
     val settings: ScanSettings = ScanSettings(),
 )
 
@@ -41,13 +42,14 @@ data class ScanUiState(
     val targetInput: String = "",
     val regionFilter: String = "",
     val portInput: String = "",
+    val searchQuery: String = "",
     val settings: ScanSettings = ScanSettings(),
     val isScanning: Boolean = false,
     val progressCompleted: Int = 0,
     val progressTotal: Int = 0,
     val responsive: Int = 0,
     val results: List<ScanResult> = emptyList(),
-    val statusText: String = "Ready",
+    val statusText: String = "",
     val lastExportPath: String = "",
-    val currentProfileHint: String = "Native Android UI • Chaquopy backend",
+    val currentProfileHint: String = "",
 )

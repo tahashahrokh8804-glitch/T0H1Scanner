@@ -1,6 +1,7 @@
 package com.t0h1.scanner
 
 import android.app.Application
+import androidx.annotation.StringRes
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.t0h1.scanner.model.AppScreen
@@ -9,7 +10,6 @@ import com.t0h1.scanner.model.ScanSettings
 import com.t0h1.scanner.model.ScanUiState
 import com.t0h1.scanner.repository.ScannerRepository
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.launch
 
 class ScanViewModel(application: Application) : AndroidViewModel(application) {
@@ -27,6 +27,7 @@ class ScanViewModel(application: Application) : AndroidViewModel(application) {
             targetInput = draft.targetInput,
             regionFilter = draft.regionFilter,
             portInput = draft.portInput,
+            searchQuery = draft.searchQuery,
             settings = draft.settings,
         )
     }
@@ -50,6 +51,23 @@ class ScanViewModel(application: Application) : AndroidViewModel(application) {
         persistDraft()
     }
 
+    fun updateSearchQuery(value: String) {
+        _uiState.value = _uiState.value.copy(searchQuery = value)
+        persistDraft()
+    }
+
+    fun clearResults() {
+        _uiState.value = _uiState.value.copy(
+            results = emptyList(),
+            progressCompleted = 0,
+            progressTotal = 0,
+            responsive = 0,
+            statusText = text(R.string.status_ready),
+            currentProfileHint = text(R.string.hero_hint),
+            lastExportPath = "",
+        )
+    }
+
     fun updateSettings(transform: (ScanSettings) -> ScanSettings) {
         val updated = transform(_uiState.value.settings)
         _uiState.value = _uiState.value.copy(settings = updated)
@@ -71,7 +89,7 @@ class ScanViewModel(application: Application) : AndroidViewModel(application) {
         val cleanedPorts = current.portInput.trim()
 
         if (cleanedTargets.isBlank()) {
-            _uiState.value = current.copy(statusText = "Enter at least one target.")
+            _uiState.value = current.copy(statusText = text(R.string.status_no_targets))
             return
         }
 
@@ -80,13 +98,13 @@ class ScanViewModel(application: Application) : AndroidViewModel(application) {
             try {
                 _uiState.value = _uiState.value.copy(
                     isScanning = true,
-                    statusText = "Scanning...",
+                    statusText = text(R.string.status_scanning),
                     progressCompleted = 0,
                     progressTotal = 0,
                     responsive = 0,
                     results = emptyList(),
                     lastExportPath = "",
-                    currentProfileHint = "Native scan in progress",
+                    currentProfileHint = text(R.string.scanning),
                 )
                 persistDraft()
 
@@ -105,19 +123,19 @@ class ScanViewModel(application: Application) : AndroidViewModel(application) {
 
                 _uiState.value = _uiState.value.copy(
                     isScanning = false,
-                    statusText = if (results.isEmpty()) "No responsive targets found." else "Completed",
+                    statusText = if (results.isEmpty()) text(R.string.status_no_responsive) else text(R.string.status_completed),
                     results = results,
                     progressCompleted = _uiState.value.progressTotal,
                     progressTotal = _uiState.value.progressTotal,
                     responsive = results.count { it.status.equals("open", true) || it.status.equals("success", true) },
-                    currentProfileHint = "Ready",
+                    currentProfileHint = text(R.string.status_ready),
                 )
                 persistDraft()
             } catch (cancelled: Exception) {
                 _uiState.value = _uiState.value.copy(
                     isScanning = false,
-                    statusText = cancelled.message ?: "Scan stopped.",
-                    currentProfileHint = "Ready",
+                    statusText = cancelled.message ?: text(R.string.status_stopping),
+                    currentProfileHint = text(R.string.status_ready),
                 )
             }
         }
@@ -128,8 +146,8 @@ class ScanViewModel(application: Application) : AndroidViewModel(application) {
         scanJob?.cancel()
         _uiState.value = _uiState.value.copy(
             isScanning = false,
-            statusText = "Stopping...",
-            currentProfileHint = "Stopping",
+            statusText = text(R.string.status_stopping),
+            currentProfileHint = text(R.string.status_stopping),
         )
     }
 
@@ -140,7 +158,7 @@ class ScanViewModel(application: Application) : AndroidViewModel(application) {
     private fun export(format: String) {
         val results = _uiState.value.results
         if (results.isEmpty()) {
-            _uiState.value = _uiState.value.copy(statusText = "Nothing to export yet.")
+            _uiState.value = _uiState.value.copy(statusText = text(R.string.status_nothing_export))
             return
         }
 
@@ -148,7 +166,7 @@ class ScanViewModel(application: Application) : AndroidViewModel(application) {
             val file = repository.exportResults(results, format)
             _uiState.value = _uiState.value.copy(
                 lastExportPath = file.absolutePath,
-                statusText = "Exported ${format.uppercase()}",
+                statusText = text(R.string.status_exported, format.uppercase()),
             )
         }
     }
@@ -159,6 +177,7 @@ class ScanViewModel(application: Application) : AndroidViewModel(application) {
             targetInput = s.targetInput,
             regionFilter = s.regionFilter,
             portInput = s.portInput,
+            searchQuery = s.searchQuery,
             settings = s.settings,
         )
     }
@@ -168,14 +187,23 @@ class ScanViewModel(application: Application) : AndroidViewModel(application) {
         targetInput = "",
         regionFilter = "",
         portInput = "",
+        searchQuery = "",
         settings = ScanSettings(),
         isScanning = false,
         progressCompleted = 0,
         progressTotal = 0,
         responsive = 0,
         results = emptyList(),
-        statusText = "Ready",
+        statusText = text(R.string.status_ready),
         lastExportPath = "",
-        currentProfileHint = "Native Android UI • Chaquopy backend",
+        currentProfileHint = text(R.string.hero_hint),
     )
+
+    private fun text(@StringRes resId: Int, vararg args: Any): String {
+        return if (args.isEmpty()) {
+            getApplication<Application>().getString(resId)
+        } else {
+            getApplication<Application>().getString(resId, *args)
+        }
+    }
 }

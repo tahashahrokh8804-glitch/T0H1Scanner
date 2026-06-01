@@ -1,8 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">T0H1 Scanner</string>
-    <string name="home">Home</string>
-    <string name="settings">Settings</string>
-    <string name="targets_hint">Enter one target per line. Examples:\n1.1.1.1\nexample.com\nexample.com:443 | US | primary</string>
-    <string name="ports_hint">Comma-separated ports, for example: 80, 443, 8080</string>
+    <string name="home_title">Home</string>
+    <string name="settings_title">Settings</string>
+
+    <string name="hero_title">Professional scanning dashboard</string>
+    <string name="hero_subtitle">Clean targets, sort results, and export fast.</string>
+    <string name="hero_hint">Native UI • Chaquopy backend • Offline-friendly workflow</string>
+
+    <string name="targets_title">Targets</string>
+    <string name="targets_label">Target list</string>
+    <string name="targets_placeholder">1.1.1.1
+example.com
+example.com:443 | US | primary</string>
+    <string name="targets_help">Use hostnames, IPs, or host:port entries. Optional region and notes tags are supported after a vertical bar.</string>
+
+    <string name="region_filter_label">Country / region filter</string>
+    <string name="region_filter_placeholder">US, EU, Asia, primary</string>
+
+    <string name="ports_label">Port list</string>
+    <string name="ports_placeholder">80, 443, 8080</string>
+
+    <string name="search_label">Search results</string>
+    <string name="search_placeholder">Search by IP, port, region, note, or status</string>
+
+    <string name="start_scan">Start scan</string>
+    <string name="stop_scan">Stop</string>
+    <string name="clear_results">Clear results</string>
+    <string name="export_csv">Export CSV</string>
+    <string name="export_txt">Export TXT</string>
+    <string name="export_json">Export JSON</string>
+
+    <string name="scanning">Scanning</string>
+    <string name="idle">Idle</string>
+    <string name="progress">Progress</string>
+    <string name="completed">Completed</string>
+    <string name="total">Total</string>
+    <string name="responsive">Responsive</string>
+    <string name="average_latency">Average latency</string>
+    <string name="best_latency">Best latency</string>
+    <string name="results_displayed">Displayed</string>
+    <string name="ms_short">ms</string>
+
+    <string name="results_title">Results</string>
+    <string name="results_empty">No results yet. Run a scan to see entries here.</string>
+    <string name="results_empty_hint">Try a few targets and save the best ones for later.</string>
+
+    <string name="status_ready">Ready</string>
+    <string name="status_scanning">Scanning...</string>
+    <string name="status_stopping">Stopping...</string>
+    <string name="status_completed">Completed</string>
+    <string name="status_no_targets">Enter at least one target.</string>
+    <string name="status_no_responsive">No responsive targets found.</string>
+    <string name="status_nothing_export">Nothing to export yet.</string>
+    <string name="status_exported">Exported %1$s</string>
+
+    <string name="settings_connection_title">Scanning defaults</string>
+    <string name="settings_info_title">App info</string>
+    <string name="timeout_seconds_label">Timeout (seconds)</string>
+    <string name="concurrency_label">Concurrency</string>
+    <string name="max_display_label">Max displayed results</string>
+    <string name="default_ports_label">Default ports</string>
+    <string name="settings_note">Persian and English are included. The app follows the device language and supports right-to-left layout.</string>
+    <string name="settings_hint">The scanner stays native and the Python engine runs through Chaquopy only when you start a scan.</string>
+    <string name="reset_defaults">Reset defaults</string>
+    <string name="version_label">Version 0.2</string>
+
+    <string name="target_label">Target</string>
+    <string name="region_label">Region</string>
+    <string name="notes_label">Notes</string>
+    <string name="status_label">Status</string>
+    <string name="latency_label">Latency</string>
+    <string name="ip_port_label">IP and port</string>
+    <string name="last_export">Last export</string>
+    <string name="status_open">Open</string>
+    <string name="status_success">Success</string>
+    <string name="status_timeout">Timeout</string>
+    <string name="status_closed">Closed</string>
+    <string name="status_error">Error</string>
+
+    <string name="settings_accessibility">Settings</string>
+    <string name="back">Back</string>
+    <string name="open_results_hint">Search and review only the targets you entered.</string>
 </resources>

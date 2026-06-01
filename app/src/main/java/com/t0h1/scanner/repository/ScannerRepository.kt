@@ -7,8 +7,8 @@ import com.t0h1.scanner.model.ScanResult
 import com.t0h1.scanner.model.ScanSettings
 import com.t0h1.scanner.model.ScanTargetSpec
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.sync.Semaphore
 import kotlinx.coroutines.sync.withPermit
 import kotlinx.coroutines.withContext
@@ -19,7 +19,6 @@ import java.time.format.DateTimeFormatter
 import java.util.Collections
 import java.util.concurrent.atomic.AtomicBoolean
 import kotlin.math.max
-import kotlin.math.min
 
 class ScannerRepository(private val context: Context) {
 
@@ -32,6 +31,7 @@ class ScannerRepository(private val context: Context) {
             targetInput = prefs.getString(KEY_TARGETS, "") ?: "",
             regionFilter = prefs.getString(KEY_REGION, "") ?: "",
             portInput = prefs.getString(KEY_PORTS, "") ?: "",
+            searchQuery = prefs.getString(KEY_SEARCH, "") ?: "",
             settings = ScanSettings(
                 timeoutSeconds = prefs.getString(KEY_TIMEOUT, "3.0")?.toDoubleOrNull() ?: 3.0,
                 concurrency = prefs.getString(KEY_CONCURRENCY, "16")?.toIntOrNull() ?: 16,
@@ -41,11 +41,12 @@ class ScannerRepository(private val context: Context) {
         )
     }
 
-    fun saveDraft(targetInput: String, regionFilter: String, portInput: String, settings: ScanSettings) {
+    fun saveDraft(targetInput: String, regionFilter: String, portInput: String, searchQuery: String, settings: ScanSettings) {
         prefs.edit()
             .putString(KEY_TARGETS, targetInput)
             .putString(KEY_REGION, regionFilter)
             .putString(KEY_PORTS, portInput)
+            .putString(KEY_SEARCH, searchQuery)
             .putString(KEY_TIMEOUT, settings.timeoutSeconds.toString())
             .putString(KEY_CONCURRENCY, settings.concurrency.toString())
             .putString(KEY_MAX_RESULTS, settings.maxDisplayedResults.toString())
@@ -103,7 +104,8 @@ class ScannerRepository(private val context: Context) {
     fun parsePorts(raw: String, fallback: String): List<Int> {
         val source = if (raw.isBlank()) fallback else raw
         return source
-            .split(',', '\n', ';', ' ')
+            .split(',', '
+', ';', ' ')
             .mapNotNull { token ->
                 val value = token.trim()
                 if (value.isBlank()) null else value.toIntOrNull()
@@ -152,7 +154,7 @@ class ScannerRepository(private val context: Context) {
         }
 
         val jsonTargets = targetsToJson(targets)
-        bridge.filterByCountry(jsonTargets, regionFilter) // keep the Python helper exercised and ready
+        bridge.filterByCountry(jsonTargets, regionFilter)
         val total = endpoints.size
         val completed = java.util.concurrent.atomic.AtomicInteger(0)
         val responsive = java.util.concurrent.atomic.AtomicInteger(0)
@@ -302,6 +304,7 @@ class ScannerRepository(private val context: Context) {
         private const val KEY_TARGETS = "targets"
         private const val KEY_REGION = "region"
         private const val KEY_PORTS = "ports"
+        private const val KEY_SEARCH = "search"
         private const val KEY_TIMEOUT = "timeout"
         private const val KEY_CONCURRENCY = "concurrency"
         private const val KEY_MAX_RESULTS = "max_results"
