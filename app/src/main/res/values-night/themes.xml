@@ -6,6 +6,5 @@
         <item name="colorPrimary">@color/t0h1_primary</item>
         <item name="colorSecondary">@color/t0h1_secondary</item>
         <item name="colorSurface">@color/t0h1_surface</item>
-        <item name="colorBackground">@color/t0h1_background</item>
     </style>
 </resources>
