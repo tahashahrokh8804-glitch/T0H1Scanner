@@ -102,17 +102,17 @@ class ScannerRepository(private val context: Context) {
     }
 
     fun parsePorts(raw: String, fallback: String): List<Int> {
-        val source = if (raw.isBlank()) fallback else raw
-        return source
-            .split(',', '
-', ';', ' ')
-            .mapNotNull { token ->
-                val value = token.trim()
-                if (value.isBlank()) null else value.toIntOrNull()
-            }
-            .filter { it in 1..65535 }
-            .distinct()
-    }
+    val source = if (raw.isBlank()) fallback else raw
+
+    return source
+        .split(',', '\n', ';', ' ')
+        .mapNotNull { token ->
+            val value = token.trim()
+            if (value.isBlank()) null else value.toIntOrNull()
+        }
+        .filter { it in 1..65535 }
+        .distinct()
+}
 
     fun buildEndpoints(targets: List<ScanTargetSpec>, ports: List<Int>): List<ScanEndpoint> {
         val out = mutableListOf<ScanEndpoint>()
