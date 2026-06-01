@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="t0h1_primary">#2563EB</color>
+    <color name="t0h1_secondary">#7C3AED</color>
+    <color name="t0h1_background">#08111F</color>
+    <color name="t0h1_surface">#10192C</color>
+    <color name="t0h1_surface_variant">#17233B</color>
+    <color name="t0h1_text">#E5E7EB</color>
+</resources>
